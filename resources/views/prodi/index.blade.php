@@ -1,3 +1,5 @@
+@extends('layout.main')
+@section('content')
 <h1>Program Studi</h1>
 
 <table>
@@ -17,5 +19,7 @@
         <td>{{$item->sekretaris}}</td>
         <td>{{$item->fakultas->nama}}</td>
     </tr>
-@endforeach
+
 </table>
+@endforeach
+@endsection

@@ -1,3 +1,5 @@
+@extends('layout.main')
+@section('content')
 <h1>Fakultas</h1>
 
 <table>
@@ -14,6 +16,6 @@
         <td>{{ $item->dekan }}</td>
         <td>{{ $item->wakil_dekan }}</td>
     </tr>
-    
+</table>  
 @endforeach
-</table>
+@endsection
