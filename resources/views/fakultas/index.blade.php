@@ -59,7 +59,5 @@
   </div>
   <!--end::Row-->
 
-
-@endforeach
 @endsection
 
