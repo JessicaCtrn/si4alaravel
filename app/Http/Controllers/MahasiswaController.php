@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fakultas;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,8 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        $fakultas = Fakultas::all(); // ambil semua data fakultas
+        return view('mahasiswa.create', compact('fakultas'));
     }
 
     /**
@@ -38,7 +40,16 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'npm' => 'required|unique:mahasiswa',
+            'nama' => 'required',
+            'jk' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'asal_sma' => 'required',
+            'prodi_id' => 'required',
+            'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
+        ]);
     }
 
     /**
