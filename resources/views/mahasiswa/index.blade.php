@@ -29,28 +29,34 @@
           </div>
         </div>
         <div class="card-body">
+          <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary mb-3">Tambah</a>
             <table class = "table">
                 <thead>
                     <tr>
+                        <th>Foto</th>
                         <th>NPM</th>
                         <th>Nama</th>
-                        <th>Jenis Kelamin</th>
-                        <th>Tanggal Lahir</th>
-                        <th>Tempat Lahir</th>
-                        <th>Asal SMA</th>
                         <th>Prodi</th>
+                        <th>Fakultas</th>
+                        <th>aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($mahasiswa as $item)
                         <tr>
+                          <td><img src ="images/{{$item->foto}}" width = "80px" /></td>
                             <td>{{ $item->npm }}</td>
                             <td>{{ $item->nama }}</td>
-                            <td>{{ $item-> jk}}</td> 
-                            <td>{{ $item->tanggal_lahir }}</td>
-                            <td>{{ $item->tempat_lahir }}</td>
-                            <td>{{ $item->asal_sma }}</td>
                             <td>{{ $item->prodi->nama }}</td>
+                            <td>{{ $item->prodi->fakultas->nama }}</td>
+                            <td>
+                              <a href="{{ route('mahasiswa.show', $item->id) }}" class="btn btn-info">Show</a>
+                              <a href="{{ route('mahasiswa.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                              <form action="{{ route('mahasiswa.destroy', $item->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

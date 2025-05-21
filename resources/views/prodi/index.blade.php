@@ -29,6 +29,7 @@
           </div>
         </div>
         <div class="card-body">
+          <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary mb-3">Tambah</a>
             <table class = "table">
                 <thead>
                     <tr>

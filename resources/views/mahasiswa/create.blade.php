@@ -23,9 +23,16 @@
                         @enderror
                       </div>
                       <div class="mb-3">
+                        <label for="npm" class="form-label">NPM</label>
+                        <input type="text" class="form-control" name="npm" value="{{ old('npm') }}">
+                        @error('npm')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                      </div>
+                      <div class="mb-3">
                         <label for="jk" class="form-label">Jenis Kelamin</label> <br>
-                        <input type="radio" class="form-control" name="jk" value="L" {{ old('jk') == 'L' ? 'checked' : '' }}> Laki-laki
-                        <input type="radio" class="form-control" name="jk" value="P" {{ old('jk') == 'P' ? 'checked' : '' }}> Perempuan
+                        <input type="radio" class="form-check-input" name="jk" value="L" {{ old('jk') == 'L' ? 'checked' : '' }}> Laki-laki
+                        <input type="radio" class="form-check-input" name="jk" value="P" {{ old('jk') == 'P' ? 'checked' : '' }}> Perempuan
                         @error('jk')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
