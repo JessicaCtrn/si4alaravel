@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title', 'Prodi')
+@section('title', 'Fakultas')
 
 @section('content')
     <!--begin::Row-->
@@ -7,49 +7,39 @@
         <div class="col-12">
         <div class="card card-primary card-outline mb-4">
                   <!--begin::Header-->
-                  <div class="card-header"><div class="card-title">Tambah Prodi</div></div>
+                  <div class="card-header"><div class="card-title">Ubah Fakultas</div></div>
                   <!--end::Header-->
                   <!--begin::Form-->
-                  <form action="{{ route('prodi.store') }}" method="POST">
+                  <form action="{{ route('fakultas.update', $fakultas->id) }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <!--begin::Body-->
                     <div class="card-body">
                       <div class="mb-3">
-                        <label for="nama" class="form-label">Nama Prodi</label>
-                        <input type="text" class="form-control" name="nama" value="{{ old('nama') }}">
+                        <label for="nama" class="form-label">Nama Fakultas</label>
+                        <input type="text" class="form-control" name="nama" value="{{ old('nama') ? old ('nama') : $fakultas->nama }}">
                         @error('nama')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                       </div>
                       <div class="mb-3">
                         <label for="singkatan" class="form-label">Singkatan</label>
-                        <input type="text" class="form-control" name="singkatan" value="{{ old('singkatan') }}">
+                        <input type="text" class="form-control" name="singkatan" value="{{ old('singkatan') ? old ('singkatan') : $fakultas->singkatan }}">
                         @error('singkatan')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                       </div>
                       <div class="mb-3">
-                        <label for="dekan" class="form-label">Nama Kaprodi</label>
-                        <input type="text" class="form-control" name="kaprodi" value="{{ old('kaprodi') }}">
-                        @error('kaprodi')
+                        <label for="dekan" class="form-label">Nama Dekan</label>
+                        <input type="text" class="form-control" name="dekan" value="{{ old('dekan') ? old ('dekan') : $fakultas->dekan }}"> 
+                        @error('dekan')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                       </div>
                       <div class="mb-3">
-                        <label for="wakil_dekan" class="form-label">Nama Sekretaris</label>
-                        <input type="text" class="form-control" name="sekretaris" value="{{ old('sekretaris') }}">
-                        @error('sekretaris')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                      </div>
-                      <div class="mb-3">
-                        <label for="fakultas_id" class="form-label">Fakultas</label>
-                        <select class ="form-control" name="fakultas_id">
-                            @foreach($fakultas as $item)
-                            <option value="{{ $item->id }}"> {{ $item->nama}} </option>
-                            @endforeach
-                        </select>
-                        @error('fakultas_id')
+                        <label for="wakil_dekan" class="form-label">Nama Wakil Dekan</label>
+                        <input type="text" class="form-control" name="wakil_dekan" value="{{ old('wakil_dekan') ? old ('wakil_dekan') : $fakultas->wakil_dekan }}">
+                        @error('wakil_dekan')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                       </div>

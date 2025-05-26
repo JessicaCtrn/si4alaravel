@@ -70,10 +70,11 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function show(Mahasiswa $mahasiswa)
+    public function show($mahasiswa)
     {
-        // dd($mahasiswa); // dump and die
-        return view('mahasiswa.show', compact('mahasiswa')); // menampilkan detail data mahasiswa
+        $mahasiswa = Mahasiswa::findOrFail($mahasiswa);
+        // dd($mahasiswa); //dump and die
+        return view('mahasiswa.show', compact('mahasiswa')); //mengirim data ke view mahasiswa.show
     }
 
     /**
@@ -105,8 +106,22 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mahasiswa $mahasiswa)
-    {
-        //
+    public function destroy($mahasiswa)
+{
+        $mahasiswa = Mahasiswa::findOrFail($mahasiswa);
+        // dd($mahasiswa); //dump and die
+
+        // hapus foto jika ada
+        if($mahasiswa->foto) { // cek apakah ada foto
+            $fotoPath = public_path('images/' . $mahasiswa->foto); // path foto
+            if (file_exists($fotoPath)) { // cek apakah file foto ada
+                unlink($fotoPath); // hapus file foto
+            }
+        }
+
+        // Hapus data mahasiswa
+        $mahasiswa->delete();
+        // Redirect ke route mahasiswa.index dengan pesan sukses
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil dihapus.');
     }
 }

@@ -60,24 +60,41 @@ class FakultasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Fakultas $fakultas) //menampilkan formulir edit data fakultas
+    public function edit($fakultas) //menampilkan formulir edit data fakultas
     {
-        //
+        $fakultas = Fakultas::findOrFail($fakultas);
+        // dd($fakultas); //dump and die
+        return view('fakultas.edit', compact('fakultas')); //mengirim data ke view fakultas.edit
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Fakultas $fakultas) //memproses penyimpanan perubahan data yg ada pada formulir edit tadi
+    public function update(Request $request, $fakultas) //memproses penyimpanan perubahan data yg ada pada formulir edit tadi
     {
-        //
+        $fakultas = Fakultas::findOrFail($fakultas); //mencari data fakultas berdasarkan id  
+        // validasi input
+        $input = $request->validate([
+            'nama' => 'required|unique:fakultas',
+            'singkatan' => 'required|max:5',
+            'dekan' => 'required',
+            'wakil_dekan' => 'required',
+        ]);
+        $fakultas->update($input); //update data fakultas dengan input yang sudah divalidasi
+        return redirect()->route('fakultas.index')->with('success', 'Fakultas berhasil diperbarui.'); //redirect ke route fakultas.index
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Fakultas $fakultas) //menghapus data fakultas
+    public function destroy($fakultas) //menghapus data fakultas
     {
-        //
+        $fakultas = Fakultas::findOrFail($fakultas);
+        // dd($fakuktas); //dump and die
+
+        // Hapus data fakultas
+        $fakultas->delete();
+        // Redirect ke route fakultas.index dengan pesan sukses
+        return redirect()->route('fakultas.index')->with('success', 'Fakultas berhasil dihapus.');
     }
 }

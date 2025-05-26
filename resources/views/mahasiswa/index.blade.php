@@ -54,8 +54,14 @@
                               <a href="{{ route('mahasiswa.edit', $item->id) }}" class="btn btn-warning">Edit</a>
                               <form action="{{ route('mahasiswa.destroy', $item->id) }}" method="POST" class="d-inline">
                                 @csrf
+
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger show_confirm"
+                                data-toggle="tooltip" title='Delete'
+                                data-nama='{{ $item->nama }}'>Delete</button>
+                                  </form>
+
+                          
                             </td>
                         </tr>
                         @endforeach
