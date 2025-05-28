@@ -51,7 +51,6 @@
         <td>{{$item->fakultas->nama}}</td>
         <td>
           <td>
-            <a href="{{ route('prodi.show', $item->id) }}" class="btn btn-info">Show</a>
             <a href="{{ route('prodi.edit', $item->id) }}" class="btn btn-warning">Edit</a>
             <form action="{{ route('prodi.destroy', $item->id) }}" method="POST" class="d-inline">
             @csrf
