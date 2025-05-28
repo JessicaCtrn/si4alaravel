@@ -11,10 +11,10 @@ class DashboardController extends Controller
     {
         //Cara 1 : sql querry
         $mahasiswaprodi = DB::select('
-        SELECT prodi.nama, COUNT(*) as jumlah
-        FROM `mahasiswa`
-        JOIN prodi ON mahasiswa.prodi_id = prodi_id
-        GROUP BY prodi.nama');
+        SELECT prodi.nama, count(*) as jumlah
+		from mahasiswa
+        join prodi on mahasiswa.prodi_id = prodi.id
+        group by prodi.nama');
         // Render the dashboard view
         return view('dashboard.index', compact('mahasiswaprodi'));
     }
