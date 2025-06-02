@@ -43,7 +43,6 @@
                     <td>{{ $matakuliah->prodi->nama}}</td>
                 </tr>
             </table>
-
         </div>
       </div>
     </div>

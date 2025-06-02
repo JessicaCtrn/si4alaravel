@@ -15,10 +15,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('matakuliah', function (Blueprint $table) {
-            $table->id();
             $table->string('nama', 50);
-            $table->string('kode', 10);
-            $table->integer('sks');
+            $table->string('kode_mk', 10);
             $table->foreignId('prodi_id')->constrained('prodi')->onDelete('restrict')->onUpdate('restrict'); // restrict biar dk teapos
             $table->timestamps();
         });

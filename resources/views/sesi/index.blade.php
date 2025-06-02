@@ -33,7 +33,6 @@
             <table class = "table">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Nama</th>
                     </tr>
                 </thead>

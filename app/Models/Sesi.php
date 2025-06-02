@@ -9,7 +9,7 @@ class Sesi extends Model
     protected $table = 'sesi'; //nama tabel
 
     protected $fillable = [
-    'nama',
+    'nama'
     ];
     public $timestamps = true; // Aktifkan created_at dan updated_at otomatis
 

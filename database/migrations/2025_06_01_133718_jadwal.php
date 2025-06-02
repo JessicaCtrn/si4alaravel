@@ -14,14 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create ('jadwal', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('sesi_id')->constrained('sesi')->onDelete('restrict')->onUpdate('restrict');
             $table->foreignId('dosen_id')->constrained('dosen')->onDelete('restrict')->onUpdate('restrict');
-            $table->foreignId('prodi_id')->constrained('prodi')->onDelete('restrict')->onUpdate('restrict');
-            $table->string('hari', 10);
-            $table->time('jam_mulai');
-            $table->time('jam_selesai');
-            $table->string('ruang', 20);
+            $table->foreignId('matakuliah_id')->constrained('matakuliah')->onDelete('restrict')->onUpdate('restrict');
+            $table->string('tahun_akademik', 10);
+            $table->string('kode_smt', 10);
+            $table->string('kelas', 10);
             $table->timestamps();
         });
     }

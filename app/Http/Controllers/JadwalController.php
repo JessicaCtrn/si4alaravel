@@ -46,15 +46,12 @@ class JadwalController extends Controller
     public function store(Request $request)
     {
         $input = $request->validate([
-            'id' => 'required|unique:jadwal',
             'tahun_akademik' => 'required',
             'kode_smt' => 'required',
             'kelas' => 'required',
             'matakuliah_id' => 'required',
             'dosen_id' => 'required',
             'sesi_id' => 'required',
-            'created_at' => 'required', 
-            'updated_at' => 'required',
 
         ]);
         Jadwal::create($input); // insert data ke tabel jadwal

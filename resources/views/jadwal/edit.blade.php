@@ -23,9 +23,9 @@
                         @enderror
                       </div>
                       <div class="mb-3">
-                        <label for="kode_semester" class="form-label">Kode Semester</label>
-                        <input type="text" class="form-control" name="kode_semester" value="{{ old('kode_semester') ? old('kode_semester') : $matakuliah->kode_semester }}">
-                        @error('kode_semester')
+                        <label for="kode_smt" class="form-label">Kode Semester</label>
+                        <input type="text" class="form-control" name="kode_smt" value="{{ old('kode_smt') ? old('kode_smt') : $matakuliah->kode_smt }}">
+                        @error('kode_smt')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                       </div>
@@ -49,7 +49,7 @@
                         @enderror
                       </div>
                       <div class="mb-3">
-                        <label for="dosen_id" class="form-label">Mata Kuliah</label>
+                        <label for="dosen_id" class="form-label">Dosen</label>
                         <select class ="form-control" name="dosen_id">
                             @foreach($jadwal as $item)
                             <option value="{{ $item->id }}" {{ old('dosen_id') == $item->id ? 'selected' : ($jadwal->dosen_id == $item->id ? 'selected' : null)}}> 

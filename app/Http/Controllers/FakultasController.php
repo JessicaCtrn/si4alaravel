@@ -53,6 +53,7 @@ class FakultasController extends Controller
     public function show(Fakultas $fakultas) //menampilkan detail data fakultas
     {
         $fakultas = Fakultas::findOrFail($fakultas);
+    
         // dd($fakultas); //dump and die
         return view('fakultas.show', compact('fakultas')); //mengirim data ke view fakultas.show
     }
