@@ -20,5 +20,9 @@ class Jadwal extends Model
     {
         return $this->belongsTo(Sesi::class, 'sesi_id', 'id'); // belongsTo : 1 jadwal hanya memiliki 1 sesi, 1 sesi bisa memiliki banyak jadwal
     }
+    public function dosen()
+    {
+        return $this->belongsTo(User::class, 'dosen_id', 'id');
+    }
 
 }

@@ -45,10 +45,7 @@ class SesiController extends Controller
     public function store(Request $request)
     {
         $input = $request->validate([
-            'id' => 'required|unique:sesi',
             'nama' => 'required|string|max:255',
-            'created_at' => 'required',
-            'updated_at' => 'required',
         ]);
         // simpan data ke database
         Sesi::create($input); // insert data ke tabel sesi

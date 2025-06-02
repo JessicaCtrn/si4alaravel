@@ -41,9 +41,6 @@
                     @foreach ($sesi as $item)
                         <tr>
                             <td>{{ $item->nama }}</td>
-                            <td>{{ $item->singkatan }}</td>
-                            <td>{{ $item->dekan }}</td>
-                            <td>{{ $item->wakil_dekan }}</td>
                             <td>
                                   <a href="{{ route('sesi.show', $item->id) }}" class="btn btn-info">Show</a>
                                   <a href="{{ route('sesi.edit', $item->id) }}" class="btn btn-warning">Edit</a>

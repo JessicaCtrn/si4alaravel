@@ -9,7 +9,7 @@ class MataKuliah extends Model
     protected $table = 'matakuliah'; //nama tabel
 
     protected $fillable = [
-        'id', 'kode_mk', 'nama', 'prodi_id', 'created_at', 'updated_at'
+        'kode_mk', 'nama', 'prodi_id'
 
     ];
     public $timestamps = true; // Aktifkan created_at dan updated_at otomatis

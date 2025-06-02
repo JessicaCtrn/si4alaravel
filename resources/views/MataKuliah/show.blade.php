@@ -31,10 +31,6 @@
         <div class="card-body">
             <table class = "table">
                 <tr>
-                    <th>ID</th>
-                    <td>{{ $matakuliah-> id}}</td>
-                </tr>
-                <tr>
                     <th>Kode Mata Kuliah</th>
                     <td>{{ $matakuliah-> kode_mk}}</td>
                 </tr>
@@ -44,7 +40,7 @@
                 </tr>
                 <tr>
                     <th>Program Studi</th>
-                    <td>{{ $matakuliah->prodi->fakultas->nama}}</td>
+                    <td>{{ $matakuliah->prodi->nama}}</td>
                 </tr>
             </table>
 

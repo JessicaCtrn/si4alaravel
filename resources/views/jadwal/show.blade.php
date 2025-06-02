@@ -31,10 +31,6 @@
         <div class="card-body">
             <table class = "table">
                 <tr>
-                    <th>ID</th>
-                    <td>{{ $jadwal-> id}}</td>
-                </tr>
-                <tr>
                     <th>Tahun Akademik</th>
                     <td>{{ $jadwal-> tahun_akademik}}</td>
                 </tr>

@@ -44,12 +44,9 @@ class MataKuliahController extends Controller
     public function store(Request $request)
     {
         $input = $request->validate([
-            'id' => 'required|unique:sesi',
             'nama' => 'required|string|max:255',
             'prodi_id' => 'required',
             'kode_mk' => 'required',
-            'created_at' => 'required',
-            'updated_at' => 'required',
         ]);
         // simpan data ke database
         MataKuliah::create($input); // insert data ke tabel mata kuliah

@@ -43,12 +43,9 @@
 
 @foreach ($matakuliah as $item)
     <tr>
-        <td>{{$item->id}}</td>
         <td>{{$item->kode_mk}}</td>
         <td>{{$item->nama}}</td>
-        <td>{{$item->sekretaris}}</td>
         <td>{{$item->prodi->nama}}</td>
-        <td>{{$item->prodi->fakultas->nama}}</td>
         <td>
           <td>
             <a href="{{ route('matakuliah.edit', $item->id) }}" class="btn btn-warning">Edit</a>

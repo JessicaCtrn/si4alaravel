@@ -31,10 +31,6 @@
         <div class="card-body">
             <table class = "table">
                 <tr>
-                    <th>ID</th>
-                    <td>{{ $sesi-> id}}</td>
-                </tr>
-                <tr>
                     <th>Nama Sesi</th>
                     <td>{{ $sesi-> nama}}</td>
                 </tr>

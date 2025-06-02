@@ -10,37 +10,38 @@
                   <div class="card-header"><div class="card-title">Tambah Jadwal</div></div>
                   <!--end::Header-->
                   <!--begin::Form-->
-                  <form action="{{ route('jadwal.store') }}" method="POST"
-                    enctype="multipart/form-data">
+                  <form action="{{ route('jadwal.update', $jadwal->id) }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <!--begin::Body-->
                     <div class="card-body">
-                        <div class="mb-3">
-                        <label for="tahun akademik" class="form-label">Tahun Akademik</label>
-                        <input type="text" class="form-control" name="tahun_akademik" value="{{ old('tahun_akademik') }}">
+                      <div class="mb-3">
+                        <label for="tahun_akademik" class="form-label">Tahun Akademik</label>
+                        <input type="text" class="form-control" name="tahun_akademik" value="{{ old('tahun_akademik') ? old('tahun_akademik') : $jadwal->tahun_akademik }}">
                         @error('tahun_akademik')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
-                        </div>
-                        <div class="mb-3">
-                        <label for="kode_smt" class="form-label">Kode Semester</label>
-                        <input type="text" class="form-control" name="kode_smt" value="{{ old('kode_smt') }}">
-                        @error('kode_smt')
+                      </div>
+                      <div class="mb-3">
+                        <label for="kode_semester" class="form-label">Kode Semester</label>
+                        <input type="text" class="form-control" name="kode_semester" value="{{ old('kode_semester') ? old('kode_semester') : $matakuliah->kode_semester }}">
+                        @error('kode_semester')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
-                        </div>
-                        <div class="mb-3">
+                      </div>
+                      <div class="mb-3">
                         <label for="kelas" class="form-label">Kelas</label>
-                        <input type="text" class="form-control" name="kelas" value="{{ old('kelas') }}">
+                        <input type="text" class="form-control" name="kelas" value="{{ old('kelas') ? old('kelas') : $matakuliah->kelas }}">
                         @error('kelas')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
-                        </div>
-                        <div class="mb-3">
+                      </div>
+                      <div class="mb-3">
                         <label for="matakuliah_id" class="form-label">Mata Kuliah</label>
                         <select class ="form-control" name="matakuliah_id">
-                            @foreach($matakuliah as $item)
-                            <option value="{{ $item->id }}"> {{ $item->nama}} </option>
+                            @foreach($jadwal as $item)
+                            <option value="{{ $item->id }}" {{ old('matakuliah_id') == $item->id ? 'selected' : ($jadwal->matakuliah_id == $item->id ? 'selected' : null)}}> 
+                                {{ $item->nama }} </option>
                             @endforeach
                         </select>
                         @error('matakuliah_id')
@@ -48,8 +49,13 @@
                         @enderror
                       </div>
                       <div class="mb-3">
-                        <label for="dosen_id" class="form-label">Dosen</label>
-                        <input type="text" class="form-control" name="dosen_id" value="{{ old('dosen_id') }}">
+                        <label for="dosen_id" class="form-label">Mata Kuliah</label>
+                        <select class ="form-control" name="dosen_id">
+                            @foreach($jadwal as $item)
+                            <option value="{{ $item->id }}" {{ old('dosen_id') == $item->id ? 'selected' : ($jadwal->dosen_id == $item->id ? 'selected' : null)}}> 
+                                {{ $item->nama }} </option>
+                            @endforeach
+                        </select>
                         @error('dosen_id')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -57,14 +63,15 @@
                       <div class="mb-3">
                         <label for="sesi_id" class="form-label">Sesi</label>
                         <select class ="form-control" name="sesi_id">
-                            @foreach($sesi as $item)
-                            <option value="{{ $item->id }}"> {{ $item->nama}} </option>
+                            @foreach($jadwal as $item)
+                            <option value="{{ $item->id }}" {{ old('sesi_id') == $item->id ? 'selected' : ($jadwal->sesi_id == $item->id ? 'selected' : null)}}> 
+                                {{ $item->nama }} </option>
                             @endforeach
                         </select>
                         @error('sesi_id')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
-                        </div>
+                      </div>
                     </div>
                     <!--end::Body-->
                     <!--begin::Footer-->
