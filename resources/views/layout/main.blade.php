@@ -207,7 +207,7 @@
                   class="user-image rounded-circle shadow"
                   alt="User Image"
                 />
-                <span class="d-none d-md-inline">Alexander Pierce</span>
+                <span class="d-none d-md-inline">{{ Auth::user() }}</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <!--begin::User Image-->
@@ -218,7 +218,7 @@
                     alt="User Image"
                   />
                   <p>
-                    Alexander Pierce - Web Developer
+                    {{ Auth::user()->name }} - Dosen/Admin
                     <small>Member since Nov. 2023</small>
                   </p>
                 </li>
@@ -235,9 +235,18 @@
                 </li>
                 <!--end::Menu Body-->
                 <!--begin::Menu Footer-->
-                <li class="user-footer">
+                <li class="user-footer d-flex justify-content-between">
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
-                  <a href="#" class="btn btn-default btn-flat float-end">Sign out</a>
+                  <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Sign Out') }}
+                            </x-dropdown-link>
+                        </form>
                 </li>
                 <!--end::Menu Footer-->
               </ul>
