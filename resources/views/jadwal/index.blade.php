@@ -33,23 +33,23 @@
             <table class = "table">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Tahun Akademik</th>
                         <th>Kode Semester</th>
                         <th>Kelas</th>
                         <th>Mata Kuliah</th>
                         <th>Dosen</th>
                         <th>Sesi</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($jadwal as $item)
                         <tr>
                             <td>{{ $item->tahun_akademik }}</td>
-                            <td>{{ $item->kode_semester }}</td>
+                            <td>{{ $item->kode_smt }}</td>
                             <td>{{ $item->kelas }}</td>
                             <td>{{ $item->matakuliah->nama }}</td>
-                            <td>{{ $item->dosen->nama }}</td>
+                            <td>{{ $item->dosen->name }}</td>
                             <td>{{ $item->sesi->nama }}</td>
                             <td>
                               <a href="{{ route('jadwal.show', $item->id) }}" class="btn btn-info">Show</a>

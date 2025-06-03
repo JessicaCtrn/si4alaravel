@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <th>Kode Semester</th>
-                    <td>{{ $jadwal-> kode_semester}}</td>
+                    <td>{{ $jadwal-> kode_smt}}</td>
                 </tr>
                 <tr>
                     <th>Kelas</th>
@@ -44,15 +44,27 @@
                 </tr>
                 <tr>
                     <th>Mata Kuliah</th>
-                    <td>{{ $jadwal-> matakuliah-> nama }}</td>
+                    <td>{{ $jadwal->matakuliah->nama }}</td>
+                </tr>
+                <tr>
+                    <th>Prodi</th>
+                    <td>{{ $jadwal->matakuliah->prodi->nama }}</td>
+                </tr>
+                <tr>
+                    <th>Fakultas</th>
+                    <td>{{ $jadwal->matakuliah->prodi->fakultas->nama }}</td>
                 </tr>
                 <tr>
                     <th>Dosen</th>
-                    <td>{{ $jadwal-> dosen-> nama }}</td>
+                    <td>{{ $jadwal->dosen->name }}</td>
+                </tr>
+                <tr>
+                    <th>Email Dosen</th>
+                    <td>{{ $jadwal->dosen->email }}</td>  
                 </tr>
                 <tr>
                     <th>Sesi</th>
-                    <td>{{ $jadwal-> sesi }}</td>
+                    <td>{{ $jadwal->sesi->nama }}</td>
                 </tr>
             </table>
 

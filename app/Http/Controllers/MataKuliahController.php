@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Fakultas;
-use App\Models\Sesi;
 use App\Models\Prodi;
 use App\Models\MataKuliah;
-use App\Models\Jadwal;
 use Illuminate\Http\Request;
 
 class MataKuliahController extends Controller
@@ -32,7 +29,7 @@ class MataKuliahController extends Controller
     public function create()
     {
         $prodi = Prodi::all(); // ambil semua data prodi
-        return view('sesi.create', compact('prodi'));
+        return view('matakuliah.create', compact('prodi'));
     }
 
     /**
@@ -44,14 +41,15 @@ class MataKuliahController extends Controller
     public function store(Request $request)
     {
         $input = $request->validate([
-            'nama' => 'required|string|max:255',
+            'kode_mk' => 'required|unique:matakuliah',
+            'nama' => 'required',
             'prodi_id' => 'required',
-            'kode_mk' => 'required',
+
         ]);
         // simpan data ke database
         MataKuliah::create($input); // insert data ke tabel mata kuliah
         // redirect ke halaman index
-        return redirect()->route('sesi.index')->with('success', 'Mata Kuliah Berhasil Ditambahkan.'); // redirect ke halaman index dengan pesan sukses
+        return redirect()->route('matakuliah.index')->with('success', 'Mata Kuliah Berhasil Ditambahkan.'); // redirect ke halaman index dengan pesan sukses
     }
 
     /**
@@ -60,9 +58,8 @@ class MataKuliahController extends Controller
      * @param  \App\Models\MataKuliah  $matakuliah
      * @return \Illuminate\Http\Response
      */
-    public function show($matakuliah)
+    public function show(MataKuliah $matakuliah)
     {
-        $matakuliah = MataKuliah::findOrFail($matakuliah);
         // dd($matakuliah); //dump and die
         return view('matakuliah.show', compact('matakuliah')); //mengirim data ke view matakuliah.show
     }
@@ -75,7 +72,9 @@ class MataKuliahController extends Controller
      */
     public function edit(MataKuliah $matakuliah)
     {
-        //
+        // dd($matakuliah); //dump and die
+        $prodi = Prodi::all(); // ambil semua data prodi
+        return view('matakuliah.edit', compact('matakuliah', 'prodi')); // mengirim data ke view matakuliah.edit
     }
 
     /**
@@ -87,7 +86,15 @@ class MataKuliahController extends Controller
      */
     public function update(Request $request, MataKuliah $matakuliah)
     {
-        //
+        $input = $request->validate([
+            'kode_mk' => 'required',
+            'nama' => 'required',
+            'prodi_id' => 'required',
+        ]);
+        // update data ke database
+        $matakuliah->update($input); // update data ke tabel mata kuliah
+        // redirect ke halaman index
+        return redirect()->route('matakuliah.index')->with('success', 'Mata Kuliah Berhasil Diupdate.'); // redirect ke halaman index dengan pesan sukses
     }
 
     /**
@@ -96,7 +103,7 @@ class MataKuliahController extends Controller
      * @param  \App\Models\MataKuliah  $matakuliah
      * @return \Illuminate\Http\Response
      */
-    public function destroy($matakuliah)
+    public function destroy(MataKuliah $matakuliah)
 {
         $matakuliah = MataKuliah::findOrFail($matakuliah);
         // dd($matakuliah); //dump and die

@@ -33,10 +33,10 @@
             <table class = "table">
                 <thead>
                     <tr>
-        <th>ID</th>
         <th>Kode Mata Kuliah</th>
         <th>Nama Mata Kuliah</th>
         <th>Program Studi</th>
+        <th>Aksi</th>
     </tr>
 </thead>
 <tbody>
@@ -48,6 +48,7 @@
         <td>{{$item->prodi->nama}}</td>
         <td>
           <td>
+            <a href="{{ route('matakuliah.show', $item->id) }}" class="btn btn-info">Show</a>
             <a href="{{ route('matakuliah.edit', $item->id) }}" class="btn btn-warning">Edit</a>
             <form action="{{ route('matakuliah.destroy', $item->id) }}" method="POST" class="d-inline">
             @csrf
@@ -63,8 +64,6 @@
 </tbody>
 </table>  
 </div>
-<!-- /.card-body -->
-<div class="card-footer">Footer</div>
 <!-- /.card-footer-->
 </div>
 <!-- /.card -->

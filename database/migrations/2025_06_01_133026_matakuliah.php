@@ -12,9 +12,10 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('matakuliah', function (Blueprint $table) {
+            $table->id(); // membuat kolom id sebagai primary key
             $table->string('nama', 50);
             $table->string('kode_mk', 10);
             $table->foreignId('prodi_id')->constrained('prodi')->onDelete('restrict')->onUpdate('restrict'); // restrict biar dk teapos

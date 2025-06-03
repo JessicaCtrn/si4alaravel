@@ -8,14 +8,6 @@ class Sesi extends Model
 {
     protected $table = 'sesi'; //nama tabel
 
-    protected $fillable = [
-    'nama'
-    ];
-    public $timestamps = true; // Aktifkan created_at dan updated_at otomatis
+    protected $fillable = ['nama'];
 
-    public function mahasiswa() 
-    {
-        return $this->belongsTo(Mahasiswa::class, 'Mahasiswa_id', 'id'); //relasi ke tabel mahasiswa
-        //belongsTo : 1 mahasiswa hanya 1 sesi
-    }
 }

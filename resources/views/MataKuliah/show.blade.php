@@ -42,6 +42,10 @@
                     <th>Program Studi</th>
                     <td>{{ $matakuliah->prodi->nama}}</td>
                 </tr>
+                <tr>
+                    <th>Fakultas</th>
+                    <td>{{ $matakuliah->prodi->fakultas->nama}}</td>
+                </tr>
             </table>
         </div>
       </div>

@@ -49,7 +49,11 @@
                       </div>
                       <div class="mb-3">
                         <label for="dosen_id" class="form-label">Dosen</label>
-                        <input type="text" class="form-control" name="dosen_id" value="{{ old('dosen_id') }}">
+                        <select class="form-control" name="dosen_id"> 
+                        <option value="">Pilih Dosen</option>
+                            @foreach($dosen as $item)
+                            <option value="{{ $item->id }}"> {{ $item->name}} </option>
+                            @endforeach
                         @error('dosen_id')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror

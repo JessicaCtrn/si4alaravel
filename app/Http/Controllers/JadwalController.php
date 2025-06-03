@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Fakultas;
-use App\Models\Mahasiswa;
-use App\Models\Prodi;
+use App\Models\User;
 use App\Models\Sesi;
 use App\Models\MataKuliah;
 use App\Models\Jadwal;
@@ -20,9 +18,9 @@ class JadwalController extends Controller
     public function index()
     {
         // panggil model jadwal menggunakan eloquent
-        $mahasiswa = Jadwal::all(); // perintah sql select * from jadwal
+        $jadwal = Jadwal::all(); // perintah sql select * from jadwal
         // dd($jadwal); // dump and die
-        return view('jadwal.index', compact('jadwal')); // selain compact bisa gunakan with()
+        return view('jadwal.index')->with('jadwal', $jadwal); // mengirim data jadwal ke view jadwal.index
     }
 
     /**
@@ -34,7 +32,8 @@ class JadwalController extends Controller
     {
         $matakuliah = MataKuliah::all(); // ambil semua data mata kuliah
         $sesi = Sesi::all(); // ambil semua data sesi
-        return view('jadwal.create', compact('matakuliah', 'sesi'));
+        $dosen = User::where('role', 'dosen')->get(); // ambil semua data dosen dengan role 'dosen'
+        return view('jadwal.create', compact('matakuliah', 'sesi', 'dosen')); // mengirim data ke view jadwal.create
     }
 
     /**
@@ -65,7 +64,7 @@ class JadwalController extends Controller
      * @param  \App\Models\Jadwal  $jadwal
      * @return \Illuminate\Http\Response
      */
-    public function show($jadwal)
+    public function show(Jadwal $jadwal)
     {
         $jadwal = Jadwal::findOrFail($jadwal);
         // dd($jadwal); //dump and die
@@ -92,7 +91,19 @@ class JadwalController extends Controller
      */
     public function update(Request $request, Jadwal $jadwal)
     {
-        //
+        $input = $request->validate([
+            'tahun_akademik' => 'required',
+            'kode_smt' => 'required',
+            'kelas' => 'required',
+            'matakuliah_id' => 'required',
+            'dosen_id' => 'required',
+            'sesi_id' => 'required',
+        ]);
+
+        // Update data jadwal
+        $jadwal->update($input);
+        // Redirect ke route mahasiswa.index dengan pesan sukses
+        return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil diperbarui.');
     }
 
     /**
@@ -101,7 +112,7 @@ class JadwalController extends Controller
      * @param  \App\Models\Jadwal  $jadwal
      * @return \Illuminate\Http\Response
      */
-    public function destroy($jadwal)
+    public function destroy(Jadwal$jadwal)
 {
         $jadwal = Jadwal::findOrFail($jadwal);
         // dd($jadwal); //dump and die

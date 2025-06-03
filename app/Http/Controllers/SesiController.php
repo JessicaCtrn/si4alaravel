@@ -2,12 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Fakultas;
 use App\Models\Sesi;
-use App\Models\Prodi;
-use App\Models\Mahasiswa;
-use App\Models\MataKuliah;
-use App\Models\Jadwal;
 use Illuminate\Http\Request;
 
 class SesiController extends Controller
@@ -22,7 +17,7 @@ class SesiController extends Controller
         // panggil model sesi menggunakan eloquent
         $sesi = Sesi::all(); // perintah sql select * from sesi
         // dd($sesi); // dump and die
-        return view('sesi.index', compact('sesi')); // selain compact bisa gunakan with()
+        return view('sesi.index')->with('sesi', $sesi);
     }
 
     /**
@@ -32,8 +27,7 @@ class SesiController extends Controller
      */
     public function create()
     {
-        $prodi = Prodi::all(); // ambil semua data prodi
-        return view('sesi.create', compact('prodi'));
+        return view('sesi.create');
     }
 
     /**
@@ -45,7 +39,7 @@ class SesiController extends Controller
     public function store(Request $request)
     {
         $input = $request->validate([
-            'nama' => 'required|string|max:255',
+            'nama' => 'required|unique:sesi'
         ]);
         // simpan data ke database
         Sesi::create($input); // insert data ke tabel sesi
@@ -59,9 +53,8 @@ class SesiController extends Controller
      * @param  \App\Models\Sesi  $sesi
      * @return \Illuminate\Http\Response
      */
-    public function show($sesi)
+    public function show(Sesi $sesi)
     {
-        $sesi = Sesi::findOrFail($sesi);
         // dd($sesi); //dump and die
         return view('sesi.show', compact('sesi')); //mengirim data ke view sesi.show
     }
@@ -74,7 +67,8 @@ class SesiController extends Controller
      */
     public function edit(Sesi $sesi)
     {
-        //
+        $sesi = Sesi::findOrFail($sesi->id);
+        return view('sesi.edit', compact('sesi')); //mengirim data ke view sesi.edit
     }
 
     /**
@@ -86,7 +80,14 @@ class SesiController extends Controller
      */
     public function update(Request $request, Sesi $sesi)
     {
-        //
+        $sesi = Sesi::findOrFail($sesi->id);
+        $input = $request->validate([
+            'nama' => 'required|unique:sesi' . $sesi->id // validasi nama harus unik kecuali untuk sesi yang sedang diupdate
+        ]);
+        // update data sesi
+        $sesi->update($input); // update data ke tabel sesi
+        // redirect ke route sesi.index dengan pesan sukses
+        return redirect()->route('sesi.index')->with('success', 'Sesi berhasil diperbarui.');
     }
 
     /**
@@ -95,11 +96,8 @@ class SesiController extends Controller
      * @param  \App\Models\Sesi  $sesi
      * @return \Illuminate\Http\Response
      */
-    public function destroy($sesi)
+    public function destroy(Sesi $sesi)
 {
-        $sesi = Sesi::findOrFail($sesi);
-        // dd($sesi); //dump and die
-
         // Hapus data sesi
         $sesi->delete();
         // Redirect ke route sesi.index dengan pesan sukses

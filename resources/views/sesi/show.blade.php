@@ -1,5 +1,6 @@
 @extends('layout.main')
-@section('title', 'Sesi')
+@section('title','Sesi')
+
 @section('content')
 <!--begin::Row-->
 <div class="row">
@@ -29,15 +30,15 @@
           </div>
         </div>
         <div class="card-body">
-            <table class = "table">
+            <table class="table table-bordered table-striped">
                 <tr>
-                    <th>Nama Sesi</th>
-                    <td>{{ $sesi-> nama}}</td>
+                    <th>Nama</th>
+                    <td>{{ $sesi->nama}}</td>
                 </tr>
             </table>
-
         </div>
       </div>
+        <!-- /.card -->
     </div>
 </div>
 <!--end::Row-->

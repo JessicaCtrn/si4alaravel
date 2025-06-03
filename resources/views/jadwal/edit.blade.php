@@ -51,9 +51,10 @@
                       <div class="mb-3">
                         <label for="dosen_id" class="form-label">Dosen</label>
                         <select class ="form-control" name="dosen_id">
-                            @foreach($jadwal as $item)
-                            <option value="{{ $item->id }}" {{ old('dosen_id') == $item->id ? 'selected' : ($jadwal->dosen_id == $item->id ? 'selected' : null)}}> 
-                                {{ $item->nama }} </option>
+                            <option value="">Pilih Dosen</option>
+                            @foreach($dosen as $item)
+                            <option value="{{ $item->id }}" {{ old('dosen_id') == $item->id ? 'selected' : '' }}>
+                                {{ $item->name }} </option>
                             @endforeach
                         </select>
                         @error('dosen_id')
