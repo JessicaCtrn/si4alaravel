@@ -97,10 +97,10 @@ class SesiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Sesi $sesi)
-{
-        // Hapus data sesi
-        $sesi->delete();
-        // Redirect ke route sesi.index dengan pesan sukses
+    {
+        $sesi->delete(); // hapus data sesi
+        // redirect ke route sesi.index dengan pesan sukses
         return redirect()->route('sesi.index')->with('success', 'Sesi berhasil dihapus.');
     }
 }
+

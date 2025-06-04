@@ -116,14 +116,10 @@ class JadwalController extends Controller
      * @param  \App\Models\Jadwal  $jadwal
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Jadwal$jadwal)
-{
-        $jadwal = Jadwal::findOrFail($jadwal);
-        // dd($jadwal); //dump and die
-
-        // Hapus data jadwal
-        $jadwal->delete();
-        // Redirect ke route mahasiswa.index dengan pesan sukses
+    public function destroy(Jadwal $jadwal)
+    {
+        $jadwal->delete(); // hapus data jadwal
+        // redirect ke route jadwal.index dengan pesan sukses
         return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil dihapus.');
     }
 }

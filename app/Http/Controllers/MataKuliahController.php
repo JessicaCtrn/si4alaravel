@@ -104,13 +104,10 @@ class MataKuliahController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(MataKuliah $matakuliah)
-{
-        $matakuliah = MataKuliah::findOrFail($matakuliah);
-        // dd($matakuliah); //dump and die
-
-        // Hapus data sesi
-        $matakuliah->delete();
-        // Redirect ke route sesi.index dengan pesan sukses
-        return redirect()->route('matakuliah.index')->with('success', 'Mata kuliah berhasil dihapus.');
+    {
+        // hapus data dari database
+        $matakuliah->delete(); // delete data dari tabel mata kuliah
+        // redirect ke halaman index
+        return redirect()->route('matakuliah.index')->with('success', 'Mata Kuliah Berhasil Dihapus.'); // redirect ke halaman index dengan pesan sukses
     }
 }
