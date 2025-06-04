@@ -1,13 +1,12 @@
 @extends('layout.main')
-@section('title', 'Prodi')
+@section('title', 'Program Studi')
 @section('content')
-<!--begin::Row-->
 <div class="row">
     <div class="col-12">
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Prodi</h3>
+          <h3 class="card-title">Program Studi</h3>
           <div class="card-tools">
             <button
               type="button"
@@ -28,51 +27,41 @@
             </button>
           </div>
         </div>
-        <div class="card-body">
-          <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary mb-3">Tambah</a>
-            <table class = "table">
-                <thead>
+        <div class="card-body"> 
+          <a href="{{route('prodi.create')}}" class="btn btn-primary"> Tambah </a>
+            <table class="table">
+                <thead> 
                     <tr>
-        <th>Nama</th>
-        <th>Singkatan</th>
-        <th>Kaprodi</th>
-        <th>Sekretaris</th>
-        <th>Fakultas</th>
-    </tr>
-</thead>
-<tbody>
-
-@foreach ($prodi as $item)
-    <tr>
-        <td>{{$item->nama}}</td>
-        <td>{{$item->singkatan}}</td>
-        <td>{{$item->kaprodi}}</td>
-        <td>{{$item->sekretaris}}</td>
-        <td>{{$item->fakultas->nama}}</td>
-        <td>
-          <td>
-            <a href="{{ route('prodi.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-            <form action="{{ route('prodi.destroy', $item->id) }}" method="POST" class="d-inline">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger show_confirm"
-            data-toggle="tooltip" title='Delete'
-            data-nama='{{ $item->nama }}'>Delete</button>
-              </form>
-            </td>
-        </td>
-    </tr>
-    @endforeach
-</tbody>
-</table>  
-</div>
-<!-- /.card-body -->
-<div class="card-footer">Footer</div>
-<!-- /.card-footer-->
-</div>
-<!-- /.card -->
-</div>
-</div>
-<!--end::Row-->
-
+                        <th>Nama</th>
+                        <th>Singkatan</th>
+                        <th>Kaprodi</th>
+                        <th>Sekretaris</th>
+                        <th>Fakultas</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                </body>
+                    @foreach ($prodi as $item)
+                        <tr> 
+                            <td>{{ $item->nama }}</td>
+                            <td>{{ $item->singkatan}}</td>
+                            <td>{{ $item->kaprodi}}</td>
+                            <td>{{ $item->sekretaris}}</td>
+                            <td>{{ $item->fakultas->nama}}</td>
+                            <td>
+                              <a href=" {{ route('prodi.show', $item-> id)}}" class="btn btn-info">show</a> <!-- BTN INFO : WARNA BIRU MUDA -->
+                              <a href=" {{ route('prodi.edit', $item-> id)}}" class="btn btn-warning">edit</a> <!-- BTN WARNING : WARNA KUNING -->
+                              <form action="{{ route('prodi.destroy', $item->id)}}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <form method="POST" action="{{ route('prodi.destroy', $item->id) }}">
+                                  @csrf
+                                  @method('DELETE')
+                                  <button type="submit" class="btn btn-danger show_confirm" data-toggle="tooltip" title="Delete" data-nama='{{ $item->nama}}'> Delete </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
 @endsection

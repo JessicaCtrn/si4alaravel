@@ -12,11 +12,10 @@ class MataKuliah extends Model
         'kode_mk', 'nama', 'prodi_id'
 
     ];
-    public $timestamps = true; // Aktifkan created_at dan updated_at otomatis
 
     public function prodi() 
     {
-        return $this->belongsTo(Prodi::class, 'Prodi_id', 'id'); //relasi ke tabel prodi
+        return $this->belongsTo(Prodi::class, 'prodi_id', 'id'); //relasi ke tabel prodi
        
     }
 }

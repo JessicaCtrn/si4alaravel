@@ -66,7 +66,7 @@ class JadwalController extends Controller
      */
     public function show(Jadwal $jadwal)
     {
-        $jadwal = Jadwal::findOrFail($jadwal);
+        $jadwal = Jadwal::findOrFail($jadwal->id);
         // dd($jadwal); //dump and die
         return view('jadwal.show', compact('jadwal')); //mengirim data ke view jadwal.show
     }
@@ -79,7 +79,11 @@ class JadwalController extends Controller
      */
     public function edit(Jadwal $jadwal)
     {
-        //
+        $jadwal = Jadwal::findOrFail($jadwal->id); // ambil data jadwal berdasarkan id
+        $matakuliah = MataKuliah::all(); // ambil semua data mata kuliah
+        $sesi = Sesi::all(); // ambil semua data sesi
+        $dosen = User::where('role', 'dosen')->get(); // ambil semua data dosen dengan role 'dosen'
+        return view('jadwal.edit', compact('jadwal', 'matakuliah', 'sesi', 'dosen')); // mengirim data ke view jadwal.edit
     }
 
     /**

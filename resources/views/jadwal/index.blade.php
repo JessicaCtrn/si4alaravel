@@ -30,7 +30,7 @@
         </div>
         <div class="card-body">
           <a href="{{ route('jadwal.create') }}" class="btn btn-primary mb-3">Tambah</a>
-            <table class = "table">
+            <br><br><table class = "table">
                 <thead>
                     <tr>
                         <th>Tahun Akademik</th>
@@ -41,42 +41,33 @@
                         <th>Sesi</th>
                         <th>Aksi</th>
                     </tr>
-                </thead>
-                <tbody>
                     @foreach ($jadwal as $item)
-                        <tr>
-                            <td>{{ $item->tahun_akademik }}</td>
-                            <td>{{ $item->kode_smt }}</td>
-                            <td>{{ $item->kelas }}</td>
-                            <td>{{ $item->matakuliah->nama }}</td>
-                            <td>{{ $item->dosen->name }}</td>
-                            <td>{{ $item->sesi->nama }}</td>
-                            <td>
-                              <a href="{{ route('jadwal.show', $item->id) }}" class="btn btn-info">Show</a>
-                              <a href="{{ route('jadwal.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-                              <form action="{{ route('jadwal.destroy', $item->id) }}" method="POST" class="d-inline">
-                                @csrf
-
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger show_confirm"
-                                data-toggle="tooltip" title='Delete'
-                                data-nama='{{ $item->nama }}'>Delete</button>
-                                  </form>
-
-                          
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-            </table>  
+                    <tr>
+                        <td>{{ $item->tahun_akademik }}</td>
+                        <td>{{ $item->kode_smt }}</td>
+                        <td>{{ $item->kelas }}</td>
+                        <td>{{ $item->matakuliah->nama }}</td>
+                        <td>{{ $item->dosen->name }}</td>
+                        <td>{{ $item->sesi->nama }}</td>
+                        <td>
+                          <a href="{{ route('jadwal.show', $item->id) }}" class="btn btn-info">Show</a>
+                          <a href="{{ route('jadwal.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                          <form action="{{ route('jadwal.destroy', $item->id) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger show_confirm"
+                            data-toggle="tooltip" title='Delete'
+                            data-nama='{{ $item->nama }}'>Delete</button>
+                          </form>
+                    </td>
+                </tr>
+                @endforeach
+            </table>
         </div>
-            <!-- /.card-body -->
-            <div class="card-footer">Footer</div>
-            <!-- /.card-footer-->
-          </div>
-          <!-- /.card -->
-        </div>
+        <!-- /.card-body -->
       </div>
-      <!--end::Row-->
-    
-    @endsection
+      <!-- /.card -->
+    </div>
+  </div>
+  <!--end::Row-->
+  @endsection

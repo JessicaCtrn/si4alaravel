@@ -15,9 +15,9 @@ class Jadwal extends Model
     'tahun_akademik', 'kode_smt', 'kelas', 'matakuliah_id', 'dosen_id', 'sesi_id'
     ];
 
-    public function mataKuliah()
+    public function matakuliah()
     {
-        return $this->belongsTo(MataKuliah::class, 'mata_kuliah_id', 'id'); // belongsTo : 1 jadwal hanya memiliki 1 mata kuliah, 1 mata kuliah bisa memiliki banyak jadwal
+        return $this->belongsTo(MataKuliah::class, 'matakuliah_id', 'id'); // belongsTo : 1 jadwal hanya memiliki 1 mata kuliah, 1 mata kuliah bisa memiliki banyak jadwal
     }
     public function sesi()
     {
