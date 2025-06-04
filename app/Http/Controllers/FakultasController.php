@@ -32,7 +32,9 @@ class FakultasController extends Controller
      */
     public function store(Request $request) //memproses penyimpanan data fakultas
     {
-        // validasi input
+        if ($request->user()->cannot('create', Fakultas::class)) {
+            abort(403);
+        }
         $input = $request->validate([
             'nama' => 'required|unique:fakultas',
             'singkatan' => 'required|max:5',
@@ -74,6 +76,9 @@ class FakultasController extends Controller
     public function update(Request $request, $fakultas) //memproses penyimpanan perubahan data yg ada pada formulir edit tadi
     {
         $fakultas = Fakultas::findOrFail($fakultas); //mencari data fakultas berdasarkan id  
+        if ($request->user()->cannot('update', $fakultas)) {
+            abort(403);
+        }
         // validasi input
         $input = $request->validate([
             'nama' => 'required|unique:fakultas',
@@ -88,10 +93,14 @@ class FakultasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($fakultas) //menghapus data fakultas
+    public function destroy(Request $request, $fakultas) //menghapus data fakultas
     {
         $fakultas = Fakultas::findOrFail($fakultas);
         // dd($fakuktas); //dump and die
+
+        if($request->user()->cannot('delete', $fakultas)) {
+            abort(403);
+        }
 
         // Hapus data fakultas
         $fakultas->delete();

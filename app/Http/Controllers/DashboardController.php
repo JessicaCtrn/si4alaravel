@@ -17,5 +17,5 @@ class DashboardController extends Controller
         group by prodi.nama');
         // Render the dashboard view
         return view('dashboard.index', compact('mahasiswaprodi'));
-    }
+    } 
 }
