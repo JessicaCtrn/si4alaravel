@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\MataKuliahController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,5 +28,9 @@ Route::resource('/sesi', SesiController::class); // menambahkan route resource s
 Route::resource('/matakuliah', MataKuliahController::class); // menambahkan route resource mata kuliah
 Route::resource('/jadwal', JadwalController::class); // menambahkan route resource jadwal
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard'); // menambahkan route dashboard
+
+Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::post('login', [AuthenticatedSessionController::class, 'store']);
+Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 require __DIR__.'/auth.php';
